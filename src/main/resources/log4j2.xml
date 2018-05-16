@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<Configuration status="ERROR">
+	<Appenders>
+		<RollingFile name="File" fileName="log/log.txt"	filePattern="log/$${date:yyyy-MM}/app-%d{yyyy-MM-dd-HH-mm}-%i.txt">
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+			<Policies>
+				<SizeBasedTriggeringPolicy size="10 MB" />
+				<TimeBasedTriggeringPolicy interval="10" modulate="true" />
+			</Policies>
+			<DefaultRolloverStrategy max="4" /> 
+		</RollingFile>
+		
+		<Console name="Console" target="SYSTEM_OUT"> 
+			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>			
+		</Console>
+	</Appenders>
+	<Loggers>
+		<Root level="debug">
+			<AppenderRef ref="Console" />
+		</Root>
+		<Root level="info">
+			<AppenderRef ref="Console" />
+		</Root>
+		<Root level="warn">
+			<AppenderRef ref="Console" />
+		</Root>
+		<Root level="error">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="File" />
+		</Root>
+		<Root level="trace">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="File" />
+		</Root>
+	</Loggers>
+</Configuration>

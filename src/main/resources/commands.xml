@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<commands>
+
+	<!-- 	common commands -->	
+	
+	<command>
+		<name>/login</name>
+		<class>com.corporation.pharmacy.controller.command.impl.LoginCommand</class>
+	</command>
+	<command>
+		<name>/logout</name>
+		<class>com.corporation.pharmacy.controller.command.impl.LogoutCommand</class>
+	</command>
+	<command>
+		<name>/change-locale</name>
+		<class>com.corporation.pharmacy.controller.command.impl.ChangeLocaleCommand</class>
+	</command>
+	<command>
+		<name>/show-instruction</name>
+		<class>com.corporation.pharmacy.controller.command.impl.ShowUploadedFileCommand</class>
+		<constructor-param-type>java.lang.String</constructor-param-type>
+		<constructor-param-value>instructions</constructor-param-value>
+	</command>
+	<command>
+		<name>/products</name>
+		<class>com.corporation.pharmacy.controller.command.impl.ShowProductsCommand</class>
+	</command>	
+	<command>
+		<name>/</name>
+		<class>com.corporation.pharmacy.controller.command.impl.GoToCommand</class>
+		<constructor-param-type>java.lang.String</constructor-param-type>
+		<constructor-param-value>home-page.jsp</constructor-param-value>
+	</command>
+	<command>
+		<name>/home-page</name>
+		<class>com.corporation.pharmacy.controller.command.impl.GoToCommand</class>
+		<constructor-param-type>java.lang.String</constructor-param-type>
+		<constructor-param-value>home-page.jsp</constructor-param-value>
+	</command>
+	<command>
+		<name>/503-error</name>
+		<class>com.corporation.pharmacy.controller.command.impl.GoToCommand</class>
+		<constructor-param-type>java.lang.String</constructor-param-type>
+		<constructor-param-value>503-error.jsp</constructor-param-value>
+	</command>
+	<command>
+		<name>/unknownCommand</name>
+		<class>com.corporation.pharmacy.controller.command.impl.GoToCommand</class>
+		<constructor-param-type>java.lang.String</constructor-param-type>
+		<constructor-param-value>404-error.jsp</constructor-param-value>
+	</command>
+		
+	
+	<!-- ======================================================================================= -->
+	
+	<!-- 	customer commands -->
+	
+	<command>
+		<name>/registration</name>
+		<class>com.corporation.pharmacy.controller.command.impl.customer.RegistrationCommand</class>
+	</command>
+	
+	<command>
+		<name>/send-full-info</name>
+		<class>com.corporation.pharmacy.controller.command.impl.customer.AddUserInfoCommand</class>
+	</command>
+	
+	<command>
+		<name>/find-products</name>
+		<class>com.corporation.pharmacy.controller.command.impl.customer.FindProductsCommand</class>
+	</command>
+	
+	<command>
+		<name>/add-to-basket</name>
+		<class>com.corporation.pharmacy.controller.command.impl.customer.AddToBasketCommand</class>
+	</command>
+	<command>
+		<name>/basket</name>
+		<class>com.corporation.pharmacy.controller.command.impl.customer.ShowBasketCommand</class>
+	</command>
+	<command>
+		<name>/change-quantity</name>
+		<class>com.corporation.pharmacy.controller.command.impl.customer.ChangeBasketQuanitityCommand</class>
+	</command>
+	<command>
+		<name>/delete-basket-item</name>
+		<class>com.corporation.pharmacy.controller.command.impl.customer.DeleteBasketItemCommand</class>
+	</command>
+	<command>
+		<name>/order</name>
+		<class>com.corporation.pharmacy.controller.command.impl.customer.PlaceOrderCommand</class>
+	</command>
+	<command>
+		<name>/order-history</name>
+		<class>com.corporation.pharmacy.controller.command.impl.customer.ShowOrderHistoryCommand</class>
+	</command>
+
+	<command>
+		<name>/get-prescription</name>
+		<class>com.corporation.pharmacy.controller.command.impl.customer.RequestPrescriptionCommand</class>
+		<constructor-param-type>com.corporation.pharmacy.entity.PrescriptionRequestType</constructor-param-type>
+		<constructor-param-value>GETTING</constructor-param-value>
+	</command>
+	<command>
+		<name>/extend-prescription</name>
+		<class>com.corporation.pharmacy.controller.command.impl.customer.RequestPrescriptionCommand</class>
+		<constructor-param-type>com.corporation.pharmacy.entity.PrescriptionRequestType</constructor-param-type>
+		<constructor-param-value>EXTENDING</constructor-param-value>
+	</command>
+	
+	<!-- ======================================================================================= -->
+	
+	<!-- 	pharmacist commands -->
+	
+	<command>
+		<name>/pharmacist/add-product</name>
+		<class>com.corporation.pharmacy.controller.command.impl.pharmacist.AddProductCommand</class>
+	</command>
+	<command>
+		<name>/pharmacist/add-product-form</name>
+		<class>com.corporation.pharmacy.controller.command.impl.GoToCommand</class>
+		<constructor-param-type>java.lang.String</constructor-param-type>
+		<constructor-param-value>pharmacist/add-product-form.jsp</constructor-param-value>
+	</command>
+		<command>
+		<name>/pharmacist/show-product</name>
+		<class>com.corporation.pharmacy.controller.command.impl.pharmacist.ShowProductCommand</class>
+	</command>
+	<command>
+		<name>/pharmacist/change-product</name>
+		<class>com.corporation.pharmacy.controller.command.impl.pharmacist.ChangeProductCommand</class>
+	</command>
+
+	<!-- ======================================================================================= -->
+	
+	<!-- 	doctor commands -->
+	
+	<command>
+		<name>/doctor/getting-requests</name>
+		<class>com.corporation.pharmacy.controller.command.impl.doctor.ShowPrescriptionRequestsCommand</class>
+		<constructor-param-type>com.corporation.pharmacy.entity.PrescriptionRequestType</constructor-param-type>
+		<constructor-param-value>GETTING</constructor-param-value>
+	</command>
+	<command>
+		<name>/doctor/extending-requests</name>
+		<class>com.corporation.pharmacy.controller.command.impl.doctor.ShowPrescriptionRequestsCommand</class>
+		<constructor-param-type>com.corporation.pharmacy.entity.PrescriptionRequestType</constructor-param-type>
+		<constructor-param-value>EXTENDING</constructor-param-value>
+	</command>
+	<command>
+		<name>/doctor/give-prescription</name>
+		<class>com.corporation.pharmacy.controller.command.impl.doctor.SatisfyPrescriptionRequestCommand</class>
+		<constructor-param-type>com.corporation.pharmacy.entity.PrescriptionRequestType</constructor-param-type>
+		<constructor-param-value>GETTING</constructor-param-value>
+	</command>
+	<command>
+		<name>/doctor/extend-prescription</name>
+		<class>com.corporation.pharmacy.controller.command.impl.doctor.SatisfyPrescriptionRequestCommand</class>
+		<constructor-param-type>com.corporation.pharmacy.entity.PrescriptionRequestType</constructor-param-type>
+		<constructor-param-value>EXTENDING</constructor-param-value>
+	</command>
+
+</commands>

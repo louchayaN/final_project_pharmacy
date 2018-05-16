@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:jsp="http://java.sun.com/xml/ns/javaee/jsp"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_4_0.xsd"
+	version="4.0">
+
+	<listener>
+		<listener-class>com.corporation.pharmacy.controller.ContextListener</listener-class>
+	</listener>
+
+	<filter>
+		<filter-name>EncodingFilter</filter-name>
+		<filter-class>com.corporation.pharmacy.controller.filter.EncodingFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>EncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	 <filter>
+        <filter-name>AccessFilter</filter-name>
+        <filter-class>com.corporation.pharmacy.controller.filter.AccessFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>AccessFilter</filter-name>
+        <url-pattern>/pharmacist/*</url-pattern>
+    </filter-mapping>
+	<filter-mapping>
+        <filter-name>AccessFilter</filter-name>
+        <url-pattern>/doctor/*</url-pattern>
+    </filter-mapping>
+    
+    <filter>
+        <filter-name>OrderAndPrescriptionAccessFilter</filter-name>
+        <filter-class>com.corporation.pharmacy.controller.filter.OrderAndPrescriptionAccessFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>OrderAndPrescriptionAccessFilter</filter-name>
+        <url-pattern>/order</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>OrderAndPrescriptionAccessFilter</filter-name>
+        <url-pattern>/get-prescription</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>OrderAndPrescriptionAccessFilter</filter-name>
+        <url-pattern>/extend-prescription</url-pattern>
+    </filter-mapping>
+    
+    <filter>
+        <filter-name>OrderAccessFilter</filter-name>
+        <filter-class>com.corporation.pharmacy.controller.filter.OrderAccessFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>OrderAccessFilter</filter-name>
+        <url-pattern>/order</url-pattern>
+    </filter-mapping>
+    
+    <filter>
+        <filter-name>StaticResourcesFilter</filter-name>
+        <filter-class>com.corporation.pharmacy.controller.filter.StaticResourcesFilter</filter-class>        
+    </filter>
+    <filter-mapping>
+        <filter-name>StaticResourcesFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+
+	<servlet>
+		<servlet-name>FrontController</servlet-name>
+		<servlet-class>com.corporation.pharmacy.controller.FrontController</servlet-class>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>FrontController</servlet-name>
+		<url-pattern>/show/*</url-pattern>
+	</servlet-mapping>
+
+	<jsp-config>
+		<taglib>
+			<taglib-uri>http://corporation.com/custom-tag/paginator</taglib-uri>
+			<taglib-location>/WEB-INF/taglib/paginator.tld</taglib-location>
+		</taglib>
+	</jsp-config>
+	
+	<session-config>
+		<session-timeout>1000</session-timeout>
+	</session-config>
+
+	<error-page>
+		<exception-type>java.lang.Runtime</exception-type>
+		<location>/WEB-INF/jsp/503-error.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>404</error-code>
+		<location>/WEB-INF/jsp/404-error.jsp</location>
+	</error-page>
+	<error-page>
+		<error-code>503</error-code>
+		<location>/WEB-INF/jsp/503-error.jsp</location>
+	</error-page>
+		
+</web-app>
