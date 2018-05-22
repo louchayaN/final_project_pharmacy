@@ -3,7 +3,7 @@
 <Configuration status="ERROR">
 	<Appenders>
 		<RollingFile name="File" fileName="log/log.txt"	filePattern="log/$${date:yyyy-MM}/app-%d{yyyy-MM-dd-HH-mm}-%i.txt">
-			<PatternLayout pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n"/>
+			<PatternLayout pattern="%d{ABSOLUTE} %5p %t %c{1}:%M:%L - %m%n"/>
 			<Policies>
 				<SizeBasedTriggeringPolicy size="10 MB" />
 				<TimeBasedTriggeringPolicy interval="10" modulate="true" />
