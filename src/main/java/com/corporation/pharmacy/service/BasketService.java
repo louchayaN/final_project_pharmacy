@@ -10,8 +10,6 @@ import com.corporation.pharmacy.service.exception.ServiceException;
 import com.corporation.pharmacy.service.impl.BasketServiceImpl;
 
 /**
- * The Interface BasketService.
- * 
  * Works with the user's basket.
  */
 public interface BasketService {

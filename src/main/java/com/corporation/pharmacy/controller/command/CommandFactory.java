@@ -10,19 +10,18 @@ import org.apache.logging.log4j.Logger;
 import com.corporation.pharmacy.controller.command.exception.CommandsXmlParserException;
 
 /**
- * A factory for creating Commands for processing the request and forming the
+ * A factory for creating Commands that process the request and form the
  * response.
  */
 public class CommandFactory {
 
     private static final Logger LOGGER = LogManager.getLogger(CommandFactory.class);
 
-    /** The single instance for use. */
     private static final CommandFactory INSTANCE = new CommandFactory();
 
     /**
-     * Key - the name of the Command representing URL the client sent when it made a
-     * request, value - Command itself
+     * Key - the name of the Command representing part of URL the client sent when
+     * it made a request, value - Command itself
      */
     private static Map<String, Command> COMMANDS;
 
@@ -39,18 +38,12 @@ public class CommandFactory {
         }
     }
 
-    /** The default url-pattern of the command. */
+    /** The default name of the command. */
     private static final String DEFAULT_COMMAND_NAME = "/unknownCommand";
 
-    /**
-     * Prevents instantiation of CommandFactory for using single instance.
-     */
     private CommandFactory() {
     }
 
-    /**
-     * Gets the single instance of CommandFactory.
-     */
     public static CommandFactory getInstance() {
         return INSTANCE;
     }

@@ -11,29 +11,20 @@ import com.corporation.pharmacy.dao.connection.ConnectionPool;
 import com.corporation.pharmacy.dao.connection.ConnectionPoolException;
 
 /**
- * A factory for creating MySqlDAO objects.
+ * A factory for creating transactional and non transactional MySqlDAO
+ * factories.
  */
 public class MySqlDAOFactory extends DAOFactory {
 
     private static final Logger LOGGER = LogManager.getLogger(MySqlDAOFactory.class);
 
-    /** The Constant NonTransactionalDAOManager. */
     private static final DAOManager daoManager = new NonTransactionalDAOManager();
 
-    /**
-     * @return the instance of non transactional DAOManager as singleton
-     */
     @Override
     public DAOManager getNonTransactionalDAOManager() {
         return daoManager;
     }
 
-    /**
-     * Gets connection from the connection pool and returns transactional DAOManager
-     * instantiated with this connection.
-     * 
-     * @return transactional DAOManager
-     */
     @Override
     public DAOManager getTransactionalDAOManager() {
         Connection connection = null;

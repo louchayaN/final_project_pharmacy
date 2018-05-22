@@ -21,15 +21,13 @@ import com.corporation.pharmacy.entity.Order;
 import com.corporation.pharmacy.entity.Product;
 
 /**
- * Defines methods for working with table 'orders'.
+ * Defines methods for working with table 'orders' in the data base.
  */
 public class OrderDAOImpl extends AbstractDAO implements OrderDAO {
 
     private static final Logger LOGGER = LogManager.getLogger(OrderDAOImpl.class);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /** MySQL Queries */
 
     private static final String ADD_ORDER = "INSERT INTO orders (`id_user`, `id_product`, `order_quantity`, `order_price`, `order_date`) SELECT `id_user`, `id_product`, `basket_quantity`, `price`, CURRENT_TIMESTAMP()"
             + "FROM basket JOIN products USING(`id_product`) WHERE `id_user` = ?;";
@@ -38,8 +36,6 @@ public class OrderDAOImpl extends AbstractDAO implements OrderDAO {
             + "FROM orders JOIN products_local USING (`id_product`) WHERE `id_user` = ? AND `locale` = ?;";
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /** Defines the order of table columns */
 
     private static final int PRODUCT_NAME = 1;
     private static final int ORDER_QUANTITY = 2;
@@ -96,9 +92,9 @@ public class OrderDAOImpl extends AbstractDAO implements OrderDAO {
     }
 
     /**
-     * Gets the orders of the user with this <code>id</code> consisting info in
-     * according with the <code>locale</code>. Returns the List of orders. Returns
-     * empty List if the user don't have any orders.
+     * Returns the orders of the user with the specified <code>id</code> consisting
+     * info in according with the <code>locale</code>. Returns empty List if the
+     * user don't have any orders.
      *
      * @param locale
      *            the locale (language)

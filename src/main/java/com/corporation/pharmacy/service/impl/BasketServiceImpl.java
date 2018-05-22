@@ -18,19 +18,12 @@ import com.corporation.pharmacy.service.BasketService;
 import com.corporation.pharmacy.service.exception.ServiceException;
 
 /**
- * The Class BasketServiceImpl is a class for working with the user's basket.
+ * It is a class for working with the user's basket.
  */
 public class BasketServiceImpl implements BasketService {
 
-    /**
-     * The single instance of non transactional DAOManager witch is a factory of DAO
-     * that is used in non transactional operations.
-     */
     private static final DAOManager daoManager = DAOFactory.getFactory().getNonTransactionalDAOManager();
 
-    /**
-     * The single instances of DAOs for non transactional operations.
-     */
     private static final BasketDAO basketDAO = daoManager.getBasketDAO();
     private static final ProductDAO productDAO = daoManager.getProductDAO();
 
@@ -53,13 +46,13 @@ public class BasketServiceImpl implements BasketService {
 
     /**
      * Adds all basket items (representing like a {@code Map<Integer, Integer>}) to
-     * basket of user with the id {@code idUser}. The {@code Map<Integer, Integer>}
-     * consists the id of product and its quantity like a pair key-value.
+     * basket of user with the specified id ({@code idUser}). The
+     * {@code Map<Integer, Integer>} consists the id of product and its quantity
+     * like a pair key-value.
      *
      * @param basket
      *            the basket representing like a {@code Map<Integer, Integer>} where
      *            key is an id of product and value is its quantity.
-     * 
      * @param idUser
      *            the id of user to whose basket basketItems will be added
      * @throws ServiceException
@@ -100,13 +93,13 @@ public class BasketServiceImpl implements BasketService {
 
     /**
      * Gets detailed info about products consisting in the user basket in according
-     * with chosen locale. Returns detailed basket.
+     * with the specified locale. Returns detailed basket.
      *
      * @param locale
-     *            the locale
+     *            the locale (language)
      * @param basket
      *            the basket
-     * @return he basket of the user like the List of BasketTO consisting info in
+     * @return the basket of the user like the List of BasketTO consisting info in
      *         according with the locale
      * @throws ServiceException
      *             the service exception
@@ -119,10 +112,10 @@ public class BasketServiceImpl implements BasketService {
 
             List<BasketTO> detailedBasket = new ArrayList<>();
             for (Product product : products) {
-                BasketTO basketView = new BasketTO();
-                basketView.setProduct(product);
-                basketView.setOrderedQuantity(basket.get(product.getIdProduct()));
-                detailedBasket.add(basketView);
+                BasketTO basketTO = new BasketTO();
+                basketTO.setProduct(product);
+                basketTO.setOrderedQuantity(basket.get(product.getIdProduct()));
+                detailedBasket.add(basketTO);
             }
 
             return detailedBasket;
@@ -132,8 +125,7 @@ public class BasketServiceImpl implements BasketService {
     }
 
     /**
-     * Change quantity of the basket item in the user's basket with the quantity
-     * defined by {@code basketItem}.
+     * Changes quantity of the specified basket item in the user's basket.
      *
      * @param basketItem
      *            the basket item with information about new quantity of product in
@@ -151,7 +143,7 @@ public class BasketServiceImpl implements BasketService {
     }
 
     /**
-     * Delete basket item from the user's basket.
+     * Deletes the specified basket item from the user's basket.
      *
      * @param basketItem
      *            the basket item that is deleted

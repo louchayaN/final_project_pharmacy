@@ -5,7 +5,6 @@ import com.corporation.pharmacy.dao.DAOFactory;
 /**
  * Thrown when {@link DAOFactory} is not defined for chosen type.
  */
-
 public class UnsupportedStoradgeTypeException extends RuntimeException {
 
     private static final long serialVersionUID = - 3862687682355132231L;

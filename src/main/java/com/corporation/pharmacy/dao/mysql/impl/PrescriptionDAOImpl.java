@@ -25,15 +25,13 @@ import com.corporation.pharmacy.entity.Product;
 import com.corporation.pharmacy.entity.User;
 
 /**
- * Defines methods for working with table 'prescriptions'.
+ * Defines methods for working with table 'prescriptions' in the data base.
  */
 public class PrescriptionDAOImpl extends AbstractDAO implements PrescriptionDAO {
 
     private static final Logger LOGGER = LogManager.getLogger(PrescriptionDAOImpl.class);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /** MySQL Queries */
 
     private static final String ADD_GETTING_REQUEST = "INSERT INTO prescriptions (`id_user`, `id_product`, `request_date`) VALUES (?, ?, CURRENT_TIMESTAMP()) "
             + "ON DUPLICATE KEY UPDATE `id_user` = `id_user`;";
@@ -56,8 +54,6 @@ public class PrescriptionDAOImpl extends AbstractDAO implements PrescriptionDAO 
             + "`date_end` = DATE_ADD(CURRENT_DATE(), INTERVAL 3 MONTH) WHERE `id_user` = ? AND `id_product` = ?;";
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /** Defines the order of table columns */
 
     private static final int ID_USER = 1;
     private static final int USER_NAME = 2;
@@ -134,7 +130,9 @@ public class PrescriptionDAOImpl extends AbstractDAO implements PrescriptionDAO 
     /**
      * Gets the prescription requests for view for <code>current page</code>
      * according with defined <code>items per page</code> and <code>locale</code>.
-     * THe type of prescriptions for view is defined by <code>requestType</code>.
+     * The type of prescriptions for view is defined by <code>requestType</code>.
+     * Returns empty List if there are no any prescription requests of the specified
+     * type.
      *
      * @param locale
      *            the locale (language)
@@ -145,7 +143,7 @@ public class PrescriptionDAOImpl extends AbstractDAO implements PrescriptionDAO 
      * @param requestType
      *            defines getting or extending type of prescription request
      * @return the List of prescription requests of defined
-     *         <code>PrescriptionRequestType</code>. Returns empty list if there are
+     *         <code>PrescriptionRequestType</code>. Returns empty List if there are
      *         no any prescription requests of the specified type.
      * @throws DaoException
      *             the exception during getting connection with data base or during
@@ -187,7 +185,7 @@ public class PrescriptionDAOImpl extends AbstractDAO implements PrescriptionDAO 
     }
 
     /**
-     * Gets the total count of prescriptions of defined
+     * Returns the total count of prescriptions requests of defined
      * <code>PrescriptionRequestType</code>.
      *
      * @param requestType

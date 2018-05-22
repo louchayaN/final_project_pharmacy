@@ -17,11 +17,15 @@ import com.corporation.pharmacy.entity.Role;
  */
 public class LogoutCommand implements Command {
 
+    private static final String RESULT_MESSAGE = "message";
+    private static final String SUCCESSFUL = "signOut";
+
     /**
      * Removes userId, login and role attributes from the session. If the user's
      * role was {@link Role#PHARMACIST} or {@link Role#DOCTOR} sends redirect to the
      * home-page of web-app for security purposes. In other cases the redirect is
-     * sent to the same page from which specified request has come.
+     * sent to the same page from which specified request has come with the message
+     * about successful sign out.
      * 
      * @param request
      *            an {@link HttpServletRequest} object that contains the request the
@@ -44,7 +48,7 @@ public class LogoutCommand implements Command {
         if (Role.PHARMACIST == role || Role.DOCTOR == role) {
             viewPath = request.getContextPath() + ViewPath.REDIRECT_HOME_PAGE;
         } else {
-            viewPath = PathUtil.getRefererPage(request);
+            viewPath = PathUtil.addParametertoRefererPage(request, RESULT_MESSAGE, SUCCESSFUL).toString();
         }
         response.sendRedirect(viewPath);
     }

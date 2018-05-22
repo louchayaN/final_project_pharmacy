@@ -25,15 +25,13 @@ import com.corporation.pharmacy.entity.Status;
 import com.corporation.pharmacy.entity.dto.BasketTO;
 
 /**
- * Defines methods for working with table 'basket'.
+ * Defines methods for working with table 'basket' in the data base.
  */
 public class BasketDAOImpl extends AbstractDAO implements BasketDAO {
 
     private static final Logger LOGGER = LogManager.getLogger(BasketDAOImpl.class);
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /** MySQL Queries */
 
     private static final String INSERT_OR_UPDATE_QUANTITY = "INSERT INTO basket (`id_user`, `id_product`, `basket_quantity`) VALUES (?, ?, ?) "
             + "ON DUPLICATE KEY UPDATE `basket_quantity` = `basket_quantity`+ ?;";
@@ -51,8 +49,6 @@ public class BasketDAOImpl extends AbstractDAO implements BasketDAO {
     private static final String DELETE_ALL_BASKET_ITEMS = "DELETE FROM basket WHERE `id_user`= ?;";
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /** Defines the order of table columns */
 
     private static final int ID_PRODUCT = 1;
     private static final int NAME = 2;
@@ -84,8 +80,8 @@ public class BasketDAOImpl extends AbstractDAO implements BasketDAO {
     }
 
     /**
-     * Adds {@code  basketItem} to the data base or if it is already in user's
-     * basket increases only its quantity.
+     * Adds the specified basket item to the user's basket in the data base or if it
+     * is already in user's basket increases only its quantity.
      *
      * @param basketItem
      *            the basket item
@@ -118,11 +114,13 @@ public class BasketDAOImpl extends AbstractDAO implements BasketDAO {
     }
 
     /**
-     * Adds all basket items to user's basket. Or if one of them is already in
-     * user's basket increases only their quantity.
+     * Adds all basket items from the specified basket to basket of the specified
+     * user in the data base. Or if one of them is already in user's basket
+     * increases only its quantity.
      *
      * @param basket
-     *            the basket of user that need to be added to the data base
+     *            the basket of user that need to be added to the data base, where
+     *            key - product id, value - its quantity)
      * @param idUser
      *            the id of user
      * @throws DaoException
@@ -275,7 +273,7 @@ public class BasketDAOImpl extends AbstractDAO implements BasketDAO {
     }
 
     /**
-     * Deletes specified basket item from the basket.
+     * Deletes specified basket item from the user's basket.
      *
      * @param basketItem
      *            the basket item

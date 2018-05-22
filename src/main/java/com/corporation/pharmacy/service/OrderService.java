@@ -8,8 +8,6 @@ import com.corporation.pharmacy.service.exception.ServiceException;
 import com.corporation.pharmacy.service.impl.OrderServiceImpl;
 
 /**
- * The Interface OrderService.
- * 
  * Works with the user's orders.
  */
 public interface OrderService {

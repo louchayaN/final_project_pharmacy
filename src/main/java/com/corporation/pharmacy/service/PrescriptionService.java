@@ -6,8 +6,6 @@ import com.corporation.pharmacy.entity.dto.PrescriptionRequestTO;
 import com.corporation.pharmacy.service.exception.ServiceException;
 
 /**
- * The Interface PrescriptionService.
- * 
  * Works with the prescriptions.
  */
 public interface PrescriptionService {

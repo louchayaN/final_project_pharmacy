@@ -26,8 +26,6 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
 
     //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-    /** MySQL Queries */
-
     private static final String IS_EMAIL_OR_LOGIN_EXIST = "SELECT EXISTS(SELECT 1 FROM `users` WHERE `email`=? OR `login`=?)";
     private static final String ADD_USER = "INSERT INTO `users` (`email`, `login`, `password`) VALUES (?, ?, ?)";
     private static final String SET_USER_FULL_INFO = "UPDATE `users` SET `name`=?, `middlename`=?, `surname`=?, `address`=?, `passport`=?, `telephone`=? WHERE `id_user` = ?;";
@@ -35,8 +33,6 @@ public class UserDAOImpl extends AbstractDAO implements UserDAO {
     private static final String GET_USER_NAME = "SELECT `name` FROM `users` WHERE `id_user`= ?;";
 
     /////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /** Defines the order of table columns */
 
     private static final int ID_USER = 1;
     private static final int LOGIN = 2;

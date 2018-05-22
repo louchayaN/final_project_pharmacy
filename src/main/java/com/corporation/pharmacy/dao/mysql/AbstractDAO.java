@@ -12,10 +12,8 @@ import com.corporation.pharmacy.dao.connection.ConnectionPoolException;
  */
 public class AbstractDAO {
 
-    /** The connection. */
     private Connection connection;
 
-    /** Defines if the connection will be transactional or not. */
     private boolean transactional;
 
     /**
@@ -26,7 +24,7 @@ public class AbstractDAO {
 
     /**
      * Instantiates a new abstract DAO for transactional operations.
-     *
+     * 
      * @param connection
      *            the connection that can be transferred between different DAO
      */
@@ -35,15 +33,6 @@ public class AbstractDAO {
         this.transactional = true;
     }
 
-    /**
-     * Returns the connection from the connection pool if its not instantiated yet
-     * or return already instantiated connection for using in transactional
-     * operations.
-     *
-     * @return the connection
-     * @throws ConnectionPoolException
-     *             the connection pool exception
-     */
     public Connection getConnection() throws ConnectionPoolException {
         if (connection == null) {
             return ConnectionPool.getInstance().getConnection();
@@ -52,15 +41,6 @@ public class AbstractDAO {
         }
     }
 
-    /**
-     * Close non transactional connection. If it's not transactional don't do
-     * anything.
-     *
-     * @param connection
-     *            the connection
-     * @throws SQLException
-     *             the SQL exception during closing the connection
-     */
     public void closeNonTransactionalConnection(Connection connection) throws SQLException {
         if ( ! transactional) {
             connection.close();

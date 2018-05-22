@@ -15,21 +15,14 @@ import com.corporation.pharmacy.service.OrderService;
 import com.corporation.pharmacy.service.exception.ServiceException;
 
 /**
- * The Class OrderServiceImpl is a class for working with the user's orders.
+ * It is a class for working with the user's orders.
  */
 public class OrderServiceImpl implements OrderService {
 
     private static final Logger LOGGER = LogManager.getLogger(OrderServiceImpl.class);
 
-    /**
-     * The single instance of non transactional DAOManager witch is a factory of DAO
-     * that is used in non transactional operations.
-     */
     private static final DAOManager daoManager = DAOFactory.getFactory().getNonTransactionalDAOManager();
 
-    /**
-     * The single instance of DAO for non transactional operations.
-     */
     private static final OrderDAO orderDAO = daoManager.getOrderDAO();
 
     /**

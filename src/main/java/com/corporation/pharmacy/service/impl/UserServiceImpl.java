@@ -13,19 +13,12 @@ import com.corporation.pharmacy.service.util.HashUtil;
 import com.corporation.pharmacy.service.validation.Validator;
 
 /**
- * The Class BasketServiceImpl is a class for working with user operations.
+ * It is a class for working with user operations.
  */
 public class UserServiceImpl implements UserService {
 
-    /**
-     * The single instance of non transactional DAOManager witch is a factory of DAO
-     * that is used in non transactional operations.
-     */
     private static DAOManager daoManager = DAOFactory.getFactory().getNonTransactionalDAOManager();
 
-    /**
-     * The single instances of DAOs for non transactional operations.
-     */
     private static UserDAO userDAO = daoManager.getUserDAO();
     private static final BasketDAO basketDAO = daoManager.getBasketDAO();
 

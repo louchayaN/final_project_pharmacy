@@ -13,13 +13,6 @@ import com.corporation.pharmacy.entity.dto.LocalizedProduct;
  */
 public class Validator {
 
-    /**
-     * Checks if the registration data about specified User is valid.
-     *
-     * @param user
-     *            the user
-     * @return true, if is registration data valid
-     */
     public static boolean isRegistrationDataValid(User user) {
         String email = user.getEmail();
         String login = user.getLogin();
@@ -37,15 +30,6 @@ public class Validator {
         return true;
     }
 
-    /**
-     * Checks if the login or email and password are valid.
-     *
-     * @param loginOrEmail
-     *            the login or email
-     * @param password
-     *            the password
-     * @return true, if the login or email and password are valid
-     */
     public static boolean isLoginDataValid(String loginOrEmail, String password) {
         if (GenericValidator.isBlankOrNull(loginOrEmail)) {
             return false;
@@ -56,13 +40,6 @@ public class Validator {
         return true;
     }
 
-    /**
-     * Checks if the data about specified LocalizedProduct is valid.
-     *
-     * @param localizedProduct
-     *            the localized product
-     * @return true, if is product data valid
-     */
     public static boolean isProductDataValid(LocalizedProduct localizedProduct) {
         if (localizedProduct.getNeedPrescription() == null) {
             return false;
@@ -96,13 +73,6 @@ public class Validator {
         return true;
     }
 
-    /**
-     * Checks if is user data valid.
-     *
-     * @param user
-     *            the user
-     * @return true, if is user data valid
-     */
     public static boolean isUserDataValid(User user) {
         if (GenericValidator.isBlankOrNull(user.getName())) {
             return false;
@@ -125,13 +95,6 @@ public class Validator {
         return true;
     }
 
-    /**
-     * Checks if is product modification data valid.
-     *
-     * @param product
-     *            the product
-     * @return true, if is product modification data valid
-     */
     public static boolean isProductModificationDataValid(Product product) {
         if (GenericValidator.isBlankOrNull(product.getName())) {
             return false;

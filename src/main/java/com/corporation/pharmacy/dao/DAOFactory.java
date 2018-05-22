@@ -10,9 +10,7 @@ import com.corporation.pharmacy.dao.mysql.MySqlDAOFactory;
 public abstract class DAOFactory {
 
     /**
-     * Gets the factory. By default it's MySql factory
-     *
-     * @return the factory
+     * Returns the factory. By default it's MySql factory
      */
     public static DAOFactory getFactory() {
         return getFactory(StoradgeTypes.MySql);
@@ -36,14 +34,8 @@ public abstract class DAOFactory {
         }
     }
 
-    /**
-     * Returns the transactional DAO manager.
-     */
     public abstract DAOManager getTransactionalDAOManager();
 
-    /**
-     * Returns non transactional DAO manager.
-     */
     public abstract DAOManager getNonTransactionalDAOManager();
 
 }

@@ -113,12 +113,12 @@ public class LoginCommand implements Command {
     }
 
     /**
-     * Define the path to view page depending on the user's specified role. If the
+     * Defines the path to view page depending on the user's specified role. If the
      * user is authorized like a {@link Role#PHARMACIST}, the view page will be the
      * pharmacist start page. If like a {@link Role#DOCTOR}, it will be the doctor
      * start page. In other cases the view page will be the same from which the
      * specified request has come with the message about successful
-     * authentification..
+     * authentification.
      *
      * @param role
      *            the role of the user.

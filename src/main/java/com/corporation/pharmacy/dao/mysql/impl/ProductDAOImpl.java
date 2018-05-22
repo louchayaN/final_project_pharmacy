@@ -25,15 +25,13 @@ import com.corporation.pharmacy.entity.dto.LocalizedProduct;
 
 /**
  * Defines methods for work with 'products' and 'products_local' data base
- * table.
+ * tables.
  */
 public class ProductDAOImpl extends AbstractDAO implements ProductDAO {
 
     private static final Logger LOGGER = LogManager.getLogger(ProductDAOImpl.class);
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /** MySQL Queries */
 
     private static final String ADD_PRODUCT = "INSERT INTO products (`is_need_prescription`, `pr_quantity`, `price`) VALUES (?, ?, ?)";
 
@@ -54,6 +52,7 @@ public class ProductDAOImpl extends AbstractDAO implements ProductDAO {
     private static final String FIND_BY_SOUNDING_WITH_ANALOGS = "SELECT `id_product`, `is_need_prescription`, `pr_quantity`, `price`, `name`, `non_patent_name`, `producer`, `form`, `instruction` "
             + "FROM products JOIN products_local USING (`id_product`) WHERE `non_patent_name` IN(SELECT `non_patent_name` FROM products_local WHERE SOUNDEX(`name`) =  SOUNDEX(?));";
 
+    private static final String DROP_TEMPORARY_TABLE = "DROP TEMPORARY TABLE IF EXISTS temporary_values;";
     private static final String CREATE_TEMPORARY_TABLE = "CREATE TEMPORARY TABLE IF NOT EXISTS temporary_values (`product_id` INT(11) NOT NULL);";
     private static final String INSERT_IDs_IN_TEMPORARY_TABLE = "INSERT INTO temporary_values (`product_id`) VALUES (?);";
     private static final String GET_PRODUCTS_BY_ID_FROM_TEMPORARY_TABLE = "SELECT `id_product`, `is_need_prescription`, `pr_quantity`, `price`, `name`, `non_patent_name`, `producer`, `form`, `instruction` "
@@ -66,8 +65,6 @@ public class ProductDAOImpl extends AbstractDAO implements ProductDAO {
             + "WHERE `products`.`id_product` = `basket`.`id_product` AND `basket`.`id_user` = ?;";
 
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-    /** Defines the order of table columns */
 
     private static final int ID_PRODUCT = 1;
     private static final int IS_NEED_PRESCRIPTION = 2;
@@ -137,7 +134,8 @@ public class ProductDAOImpl extends AbstractDAO implements ProductDAO {
     }
 
     /**
-     * Adds product info in the different locales to the Product with this id.
+     * Adds product info in the different locales (languages) to the product with
+     * the specified id.
      *
      * @param productInfoForDifferentLocales
      *            product info in the different locales (languages)
@@ -217,8 +215,9 @@ public class ProductDAOImpl extends AbstractDAO implements ProductDAO {
     }
 
     /**
-     * Gets the products List for current page, according defined quantity of items
-     * per page and locale (language) .
+     * Gets the products List for current page, according specified quantity of
+     * items per page and locale (language). Returns empty List if there are no
+     * products.
      *
      * @param locale
      *            the locale (language)
@@ -263,8 +262,8 @@ public class ProductDAOImpl extends AbstractDAO implements ProductDAO {
     }
 
     /**
-     * Gets the total count of products that there are in the data base in this
-     * <code>locale</code>.
+     * Returns the total count of products that there are in the data base in the
+     * specified <code>locale</code>.
      *
      * @param locale
      *            the locale (language)
@@ -318,23 +317,27 @@ public class ProductDAOImpl extends AbstractDAO implements ProductDAO {
         PreparedStatement statement1 = null;
         PreparedStatement statement2 = null;
         PreparedStatement statement3 = null;
+        PreparedStatement statement4 = null;
         ResultSet rs = null;
         try {
             connection = getConnection();
 
-            statement1 = connection.prepareStatement(CREATE_TEMPORARY_TABLE);
+            statement1 = connection.prepareStatement(DROP_TEMPORARY_TABLE);
             statement1.executeUpdate();
 
-            statement2 = connection.prepareStatement(INSERT_IDs_IN_TEMPORARY_TABLE);
-            for (Integer productId : productsId) {
-                statement2.setInt(1, productId);
-                statement2.addBatch();
-            }
-            statement2.executeBatch();
+            statement2 = connection.prepareStatement(CREATE_TEMPORARY_TABLE);
+            statement2.executeUpdate();
 
-            statement3 = connection.prepareStatement(GET_PRODUCTS_BY_ID_FROM_TEMPORARY_TABLE);
-            statement3.setString(1, locale.name());
-            rs = statement3.executeQuery();
+            statement3 = connection.prepareStatement(INSERT_IDs_IN_TEMPORARY_TABLE);
+            for (Integer productId : productsId) {
+                statement3.setInt(1, productId);
+                statement3.addBatch();
+            }
+            statement3.executeBatch();
+
+            statement4 = connection.prepareStatement(GET_PRODUCTS_BY_ID_FROM_TEMPORARY_TABLE);
+            statement4.setString(1, locale.name());
+            rs = statement4.executeQuery();
 
             List<Product> products = formProducts(rs);
             return products;
@@ -343,7 +346,7 @@ public class ProductDAOImpl extends AbstractDAO implements ProductDAO {
         } finally {
             try {
                 closeNonTransactionalConnection(connection);
-                ConnectionPool.getInstance().closeDBResources(rs, statement1, statement2, statement3);
+                ConnectionPool.getInstance().closeDBResources(rs, statement1, statement2, statement3, statement4);
             } catch (SQLException e) {
                 LOGGER.warn("Exception during closing DB resources.", e);
             }
@@ -355,8 +358,7 @@ public class ProductDAOImpl extends AbstractDAO implements ProductDAO {
      * of found products will be also included analogues by the non patent name of
      * the product. If <code>includingAnalogs</code> is false the searching will be
      * in strict accordance with the defined <code>product name</code>. Returns the
-     * List of found products. The List will be empty if no one product has been
-     * found.
+     * List of found products. The List will be empty if no products has been found.
      *
      * @param productName
      *            the product name

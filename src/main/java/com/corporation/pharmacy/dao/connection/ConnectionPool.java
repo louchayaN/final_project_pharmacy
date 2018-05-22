@@ -24,25 +24,15 @@ public final class ConnectionPool {
     private String password;
     private int poolSize;
 
-    /** The single instance of the connection pool */
     private static final ConnectionPool INSTANCE = new ConnectionPool();
 
-    /**
-     * Prevents from instantiation of a new connection pool.
-     */
     private ConnectionPool() {
     }
 
-    /**
-     * Returns the single instance of Connection Pool.
-     */
     public static ConnectionPool getInstance() {
         return INSTANCE;
     }
 
-    /**
-     * Returns the queue that keeps the connections.
-     */
     public BlockingQueue<Connection> getConnectionQueue() {
         return connectionQueue;
     }
@@ -75,14 +65,6 @@ public final class ConnectionPool {
         }
     }
 
-    /**
-     * Initializes ConnectionPool fields with data base and connection pool
-     * configurations
-     *
-     * @param propertiesFilePath
-     *            the path to properties file with data base and connection pool
-     *            configurations
-     */
     private void initDBParametres(String propertiesFilePath) {
         ResourceBundle resource = ResourceBundle.getBundle(propertiesFilePath);
         driverName = resource.getString(DBParameter.DB_DRIVER);
@@ -114,62 +96,22 @@ public final class ConnectionPool {
         return connection;
     }
 
-    /**
-     * Close data base resources (Connection, Statement and ResultSet)
-     *
-     * @param connection
-     *            the connection
-     * @param statement
-     *            the statement
-     * @param resultSet
-     *            the result set
-     * @throws SQLException
-     *             if a database access error occurs
-     */
     public void closeDBResources(Connection connection, Statement statement, ResultSet resultSet) throws SQLException {
         closeResultSet(resultSet);
         closeStatement(statement);
         closeConnection(connection);
     }
 
-    /**
-     * Close data base resources (Connection, Statement and ResultSet)
-     *
-     * @param connection
-     *            the connection
-     * @param statement
-     *            the statement
-     * @throws SQLException
-     *             if a database access error occurs
-     */
     public void closeDBResources(Connection connection, Statement statement) throws SQLException {
         closeDBResources(connection, statement, null);
     }
 
-    /**
-     * Close data base resources
-     *
-     * @param statements
-     *            the statements
-     * @throws SQLException
-     *             if a database access error occurs
-     */
     public void closeDBResources(Statement... statements) throws SQLException {
         for (Statement statement : statements) {
             closeStatement(statement);
         }
     }
 
-    /**
-     * Close data base resources
-     *
-     * @param resultSet
-     *            the result set
-     * @param statements
-     *            the statements
-     * @throws SQLException
-     *             if a database access error occurs
-     */
     public void closeDBResources(ResultSet resultSet, Statement... statements) throws SQLException {
         closeResultSet(resultSet);
         for (Statement statement : statements) {
@@ -177,42 +119,18 @@ public final class ConnectionPool {
         }
     }
 
-    /**
-     * Close the connection if not null.
-     *
-     * @param connection
-     *            the connection
-     * @throws SQLException
-     *             if a database access error occurs
-     */
     private void closeConnection(Connection connection) throws SQLException {
         if (connection != null) {
             connection.close();
         }
     }
 
-    /**
-     * Close statement if not null.
-     *
-     * @param statement
-     *            the statement
-     * @throws SQLException
-     *             if a database access error occurs
-     */
     private void closeStatement(Statement statement) throws SQLException {
         if (statement != null) {
             statement.close();
         }
     }
 
-    /**
-     * Close ResultSet if not null.
-     *
-     * @param resultSet
-     *            the ResultSet
-     * @throws SQLException
-     *             if a database access error occurs
-     */
     private void closeResultSet(ResultSet resultSet) throws SQLException {
         if (resultSet != null) {
             resultSet.close();

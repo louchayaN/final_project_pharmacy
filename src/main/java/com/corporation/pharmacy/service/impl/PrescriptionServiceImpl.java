@@ -14,20 +14,12 @@ import com.corporation.pharmacy.service.PrescriptionService;
 import com.corporation.pharmacy.service.exception.ServiceException;
 
 /**
- * The Class PrescriptionServiceImpl is a class for working with the
- * prescriptions.
+ * It is a class for working with the prescriptions.
  */
 public class PrescriptionServiceImpl implements PrescriptionService {
 
-    /**
-     * The single instance of non transactional DAOManager witch is a factory of DAO
-     * that is used in non transactional operations.
-     */
     private static final DAOManager daoManager = DAOFactory.getFactory().getNonTransactionalDAOManager();
 
-    /**
-     * The single instance of DAO for non transactional operations.
-     */
     private static final PrescriptionDAO prescriptionDAO = daoManager.getPrescriptionDAO();
 
     /**

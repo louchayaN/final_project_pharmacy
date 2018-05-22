@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Defines the common command method for processing the request and forming the
+ * Defines the command method for processing the request and forming the
  * response.
  */
 public interface Command {

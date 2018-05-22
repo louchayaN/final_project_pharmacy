@@ -17,68 +17,42 @@ import com.corporation.pharmacy.dao.mysql.impl.ProductDAOImpl;
 import com.corporation.pharmacy.dao.mysql.impl.UserDAOImpl;
 
 /**
- * The Class TransactionalDAOManager is a factory of DAO implementation objects
- * with defined connection. Supports transactional operations.
+ * It is a factory of DAO implementation objects with defined connection.
+ * Supports transactional operations.
  */
 public class TransactionalDAOManager implements DAOManager {
 
-    /** The connection. */
     private Connection connection;
 
-    /**
-     * Instantiates a new transactional DAOManager with defined connection.
-     *
-     * @param connection
-     *            the connection for transactional operations
-     */
     protected TransactionalDAOManager(Connection connection) {
         this.connection = connection;
     }
 
-    /**
-     * @return new UserDAO implementation with defined connection.
-     */
     @Override
     public UserDAO getUserDAO() {
         return new UserDAOImpl(connection);
     }
 
-    /**
-     * @return new ProductDAO implementation with defined connection.
-     */
     @Override
     public ProductDAO getProductDAO() {
         return new ProductDAOImpl(connection);
     }
 
-    /**
-     * @return new BasketDAO implementation with defined connection.
-     */
     @Override
     public BasketDAO getBasketDAO() {
         return new BasketDAOImpl(connection);
     }
 
-    /**
-     * @return new PrescriptionDAO implementation with defined connection.
-     */
     @Override
     public PrescriptionDAO getPrescriptionDAO() {
         return new PrescriptionDAOImpl(connection);
     }
 
-    /**
-     * @return new OrderDAO implementation with defined connection.
-     */
     @Override
     public OrderDAO getOrderDAO() {
         return new OrderDAOImpl(connection);
     }
 
-    /**
-     * Starts the transaction by calling {@code setAutoCommit(false)} on the
-     * connection of this DAO implementation.
-     */
     @Override
     public void startTransaction() throws DaoException {
         try {
@@ -88,10 +62,6 @@ public class TransactionalDAOManager implements DAOManager {
         }
     }
 
-    /**
-     * Ends the transaction by calling {@code commit()} on the connection of this
-     * DAO implementation.
-     */
     @Override
     public void commit() throws DaoException {
         try {
@@ -101,10 +71,6 @@ public class TransactionalDAOManager implements DAOManager {
         }
     }
 
-    /**
-     * Rollback the transaction by calling {@code rollback()} on the connection of
-     * this DAO implementation.
-     */
     @Override
     public void rollback() throws DaoException {
         try {
@@ -114,10 +80,6 @@ public class TransactionalDAOManager implements DAOManager {
         }
     }
 
-    /**
-     * Closes the transaction by calling {@code close()} on the connection of this
-     * DAO implementation.
-     */
     @Override
     public void close() throws DaoException {
         try {
@@ -127,11 +89,6 @@ public class TransactionalDAOManager implements DAOManager {
         }
     }
 
-    /**
-     * Sets the transaction isolation level by calling
-     * {@code setTransactionIsolation(level)} on the connection of this DAO
-     * implementation.
-     */
     @Override
     public void setTransactionIsolation(int level) throws DaoException {
         try {

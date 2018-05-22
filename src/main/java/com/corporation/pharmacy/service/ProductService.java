@@ -12,8 +12,6 @@ import com.corporation.pharmacy.service.exception.ServiceException;
 import com.corporation.pharmacy.service.exception.ValidationException;
 
 /**
- * The Interface ProductService.
- * 
  * Works with the products.
  */
 public interface ProductService {

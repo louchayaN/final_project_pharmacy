@@ -21,19 +21,12 @@ import com.corporation.pharmacy.service.exception.ValidationException;
 import com.corporation.pharmacy.service.validation.Validator;
 
 /**
- * The Class ProductServiceImpl is a class for working with products.
+ * It is a class for working with products.
  */
 public class ProductServiceImpl implements ProductService {
 
-    /**
-     * The single instance of non transactional DAOManager witch is a factory of DAO
-     * that is used in non transactional operations.
-     */
     private static final Logger LOGGER = LogManager.getLogger(ProductServiceImpl.class);
 
-    /**
-     * The single instances of DAOs for non transactional operations.
-     */
     private static final DAOManager daoManager = DAOFactory.getFactory().getNonTransactionalDAOManager();
     private static final ProductDAO productDAO = daoManager.getProductDAO();
 

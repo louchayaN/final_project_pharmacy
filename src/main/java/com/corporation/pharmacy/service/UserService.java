@@ -5,8 +5,6 @@ import com.corporation.pharmacy.service.exception.ServiceException;
 import com.corporation.pharmacy.service.exception.ValidationException;
 
 /**
- * The Interface UserService.
- * 
  * Works with user operations
  */
 public interface UserService {
