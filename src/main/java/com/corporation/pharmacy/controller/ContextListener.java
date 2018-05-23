@@ -10,8 +10,8 @@ import com.corporation.pharmacy.dao.connection.ConnectionPool;
 import com.corporation.pharmacy.dao.connection.ConnectionPoolException;
 
 /**
- * The Class ContextListener is for instantiating and destroying the connection
- * pool at the deployment and undeployment of application respectively.
+ * The class for instantiating and destroying the connection pool at the
+ * deployment and undeployment of application respectively.
  */
 public class ContextListener implements ServletContextListener {
 
@@ -20,12 +20,6 @@ public class ContextListener implements ServletContextListener {
     /** Properties file with data base and connection pool configurations */
     private static final String DB_PROPERTIES_FILE = "db";
 
-    /**
-     * Initializing connection pool in according with configuration in properties
-     * file.
-     * 
-     * @see {@link ServletContextListener#contextInitialized}
-     */
     @Override
     public void contextInitialized(ServletContextEvent event) {
         try {
@@ -36,11 +30,6 @@ public class ContextListener implements ServletContextListener {
         }
     }
 
-    /**
-     * Destroy the connection pool.
-     * 
-     * @see {@link ServletContextListener#contextDestroyed}
-     */
     @Override
     public void contextDestroyed(ServletContextEvent event) {
         try {

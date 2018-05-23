@@ -10,9 +10,6 @@ import javax.servlet.http.HttpServletResponse;
 import com.corporation.pharmacy.controller.command.Command;
 import com.corporation.pharmacy.controller.command.CommandFactory;
 
-/**
- * Is a front servlet for processing all requests.
- */
 public final class FrontController extends HttpServlet {
 
     private static final long serialVersionUID = 2554176376238112496L;

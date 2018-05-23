@@ -107,8 +107,8 @@ public class CommandsXmlParser {
      * information about a Command keeps in the xml file reflection is used for
      * instantiation. If the type of Command constructor is not defined in the xml
      * file instantiation of a command with default constructor takes place.
-     * Otherwise instantiation happens in accordance with constructor parameter
-     * types and their value.
+     * Otherwise instantiation happens in accordance with constructor parameter type
+     * and its value.
      *
      * @param commandElement
      *            the Element formed from the xml file that represents Command

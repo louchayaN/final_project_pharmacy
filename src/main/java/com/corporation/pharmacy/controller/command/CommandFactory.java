@@ -21,7 +21,7 @@ public class CommandFactory {
 
     /**
      * Key - the name of the Command representing part of URL the client sent when
-     * it made a request, value - Command itself
+     * he made a request, value - Command itself
      */
     private static Map<String, Command> COMMANDS;
 
@@ -49,15 +49,14 @@ public class CommandFactory {
     }
 
     /**
-     * Returns the Command associated with the URL the client sent when it made
-     * specified request in according with the path info from the Map of
-     * {@link #COMMANDS}. If the command with this name hasn't been found (is
-     * {@code null}) returns default Command.
+     * Returns the Command associated with the URL the client sent when he made
+     * specified request. If the command hasn't been found (is {@code null}) returns
+     * default Command.
      *
      * @param request
      *            the request
-     * @return the Command associated with the URL the client sent when it made
-     *         specified request. Or default Command if it wasn't found
+     * @return the Command associated with the URL the client sent when he made
+     *         specified request. Returns default Command if it wasn't found
      */
     public Command getCommand(HttpServletRequest request) {
         String commandName = request.getPathInfo();
