@@ -4,10 +4,10 @@
 
 Техническое описание проекта:
 Java 9; </br>
-# JavaEE: Servlet, JSP;
-# Server / Servlet container: Tomcat 9.0
-Logger: Log4J;
-Data base: MySQL;
-JDBC;
-Tests: JUnit4;
+JavaEE: Servlet, JSP; </br>
+Server / Servlet container: Tomcat 9.0 </br>
+Logger: Log4J; </br>
+Data base: MySQL; </br>
+JDBC; </br>
+Tests: JUnit4; </br>
 Build tool: Maven;
